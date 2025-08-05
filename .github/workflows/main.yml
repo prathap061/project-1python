@@ -1,0 +1,30 @@
+name: Test and Deploy to Streamlit
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  test-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.10
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+        pytest test_model.py
+
+    - name: Keep GitHub Actions alive (for Streamlit Cloud to detect update)
+      run: |
+        echo "Deployment triggered to Streamlit Cloud!"
