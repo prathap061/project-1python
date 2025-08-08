@@ -1,17 +1,14 @@
 import streamlit as st
-from model import get_model
 
-clf, iris = get_model()
+st.title("Sleep Predictor AI 🧠")
 
-st.title("🌸 Iris Flower Classifier")
+# Input from user
+hours = st.slider("How many hours did you sleep?", 0, 12, 6)
 
-sepal_length = st.slider('Sepal length', 4.0, 8.0, 5.0)
-sepal_width = st.slider('Sepal width', 2.0, 4.5, 3.0)
-petal_length = st.slider('Petal length', 1.0, 7.0, 4.0)
-petal_width = st.slider('Petal width', 0.1, 2.5, 1.0)
+# Basic ML-like logic
+def predict(hours_slept):
+    return "Tired 😴" if hours_slept < 6 else "Not Tired 😃"
 
-input_data = [[sepal_length, sepal_width, petal_length, petal_width]]
-prediction = clf.predict(input_data)[0]
-predicted_class = iris.target_names[prediction]
-
-st.success(f"Predicted Flower: {predicted_class}")
+# Show prediction
+prediction = predict(hours)
+st.write(f"Prediction: **{prediction}**")
