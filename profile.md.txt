@@ -1,1 +1,2 @@
 this is the sample text document for assignment purpose
+the file is modified
